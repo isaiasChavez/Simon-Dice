@@ -8,7 +8,7 @@ const btnEmpezar = document.getElementById('btnEmpezar')
 const centrador = document.getElementById("centrador") 
 const marron = 1000
 
-const ULTIMO_NIVEL = 10
+const ULTIMO_NIVEL = 2
 
 class Juego {
   constructor() {
@@ -138,13 +138,15 @@ class Juego {
                         const responseModal =  swal('¡Correcto!',"La secuencia es la indicada",'success')
                         responseModal
                         .then(() =>{
-                            this.nivel ++
-                            this.modificarContador(this.nivel)
+                            this.nivel++
                             this.eliminarEventosClick()
                             
                             if(this.nivel === (ULTIMO_NIVEL + 1)){
                                 this.ganarJuego()
+                                
+
                             }else{
+                                this.modificarContador(this.nivel)
                                 setTimeout(this.siguienteNivel, 1000)
                                 
                             }
