@@ -4,6 +4,7 @@ const violeta = document.getElementById('violeta')
 const naranja = document.getElementById('naranja')
 const verde = document.getElementById('verde')
 const btnEmpezar = document.getElementById('btnEmpezar')
+const centrador = document.getElementById("centrador") 
 const marron = 1000
 
 const ULTIMO_NIVEL = 10
@@ -33,11 +34,20 @@ class Juego {
 
   }
   toggleBtnEmpezar(){
-   if(btnEmpezar.classList.contains('hide')){
-       btnEmpezar.classList.remove('hide')
+   if(btnEmpezar.classList.contains('removeButton')){
+    centrador.classList.remove('hide')
+    btnEmpezar.classList.remove('hide')
+       btnEmpezar.classList.remove('removeButton')
+       centrador.classList.remove('removeButton')
+      
       }else{
-          
-          btnEmpezar.classList.add('hide')
+        centrador.classList.add('hide')
+        btnEmpezar.classList.add('hide')
+
+          setTimeout(() => {
+            centrador.classList.add('removeButton')
+            btnEmpezar.classList.add('removeButton')
+          }, 1000);
    }
   }
   generarSecuencia(){
@@ -78,15 +88,15 @@ class Juego {
       }
   }
 
-  iluminarSecuencia(){
+  iluminarSecuencia( time = 1000){
       for(let i = 0; i< this.nivel; i++){
           let color = this.transformarNumeroAColor(this.secuencia[i])
           setTimeout(() => {
               this.iluminarColor(color)
-          }, 1000 * i)
+          }, time * i)   
       }
   }
-  iluminarColor(color){
+   iluminarColor(color){
       this.colores[color].classList.add('light')
       setTimeout(() => {
           this.apagarColor(color)
@@ -109,7 +119,7 @@ class Juego {
       this.colores.violeta.removeEventListener('click',this.elegirColor)
       this.colores.naranja.removeEventListener('click',this.elegirColor)
   }
-  elegirColor(ev){
+   elegirColor(ev){
       const nombreColor = ev.target.dataset.color
       const numeroColor = this.transformarColorANumero(nombreColor)
 
@@ -118,15 +128,23 @@ class Juego {
       if(numeroColor === this.secuencia[this.subnivel]){
           this.subnivel++
           if(this.subnivel === this.nivel){
-              swal('¡Correcto!',"La secuencia es la indicada",'success')
-              this.nivel ++
-              this.eliminarEventosClick()
-              if(this.nivel === (ULTIMO_NIVEL + 1)){
-                  this.ganarJuego()
-              }else{
-                  setTimeout(this.siguienteNivel, 2000)
-                  
-              }
+                  setTimeout(() => {
+                        const responseModal =  swal('¡Correcto!',"La secuencia es la indicada",'success')
+                        responseModal
+                        .then(() =>{
+                            this.nivel ++
+                            this.eliminarEventosClick()
+                            
+                            if(this.nivel === (ULTIMO_NIVEL + 1)){
+                                this.ganarJuego()
+                            }else{
+                                setTimeout(this.siguienteNivel, 1000)
+                                
+                            }
+                        })     
+                  }, 500);
+                            
+                 
           }
       }else{
           this.perderJuego()
