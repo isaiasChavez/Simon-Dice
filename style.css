@@ -1,16 +1,37 @@
-
+@import url('https://fonts.googleapis.com/css?family=Kavoon&display=swap');      
+      
+      *{
+        font-family: 'Kavoon', cursive;
+      }
       body {
         margin: 0;
         display: flex;
         align-items: center;
         height: 100vh;
         position: relative;
-        
+       
       }
+      .container{
+        background: #ffae16;
+        min-height: 100vh;
+        width:100%;
+        max-width: 100vw;
+        display: grid;
+        grid-template: 1fr 1fr 1fr 1fr / 1fr 1fr 1fr 1fr;
+        grid-template-areas: "a b c d"
+                              "e f f g" 
+                              "h f f i"
+                              "j k l m";
+        justify-content: center;
+        align-items: center;
 
+      }
       .gameboard {
-        height: 90%;
-        width: 90%;
+        box-shadow: -1px 0px 9px 0px black;
+
+        grid-area: f;
+        height: 50vh;
+        width: 50vh;
         border-radius: 50%;
         overflow: hidden;
         margin: 0 auto;
@@ -23,6 +44,42 @@
         width: 50%;
         height: 50%;
         display: inline-block;
+        
+      }
+      .color:active{
+        animation-name: pushup;
+        animation-duration: 0.4s;
+      }
+      .titleOfGame{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        text-shadow: 2px 2px 0px black;
+
+      }
+      .contador{
+        grid-area: d;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+        
+      }
+      .contadorbox{
+        border-radius: 6px;
+        padding: 5% 10%;
+        border: solid 1px rgba(105, 100, 100, 0.26);
+        background: #ffed007a;
+        color:white;
+        text-shadow: 2px 2px 0px black;
+
+        font-size: 1.5em;
+        box-shadow: 1px 1px 2px 0px #000000ed;
+
       }
 
       .left {
@@ -35,6 +92,7 @@
 
       .celeste {
         background: #22a6b3;
+        
       }
 
       .celeste.light {
@@ -67,11 +125,12 @@
       .centrador{
         width: 100%;
         height: 100%;
-        position: absolute;
+
         display: flex;
         justify-content: center;
         align-items: center;
-        
+        grid-row: 2 / 4;
+        grid-column: 2 / 4;
       }
       .btn-start {
         width: 300px;
@@ -83,6 +142,7 @@
         position: absolute;
         border-radius: 6px;
         z-index: 100;
+        
       }
 
       .hide {
@@ -94,9 +154,7 @@
         display: none;
         
       }
-      *{
-          font-family: Arial, Helvetica, sans-serif;
-      }
+    
       @media (max-width: 740px) { 
         .btn-start{
           width: 250px;
@@ -109,6 +167,28 @@
       }
 
       @media (max-width: 540px) { 
+
+        .container{
+          grid-template: 1fr 1fr 1fr 1fr /  1fr 1fr 1fr;
+          grid-template-areas: "a b d"
+                              "f f f " 
+                              "f f f "
+                              "j k l ";
+        }
+        .contador{
+          grid-area: k;
+        }
+        .titleOfGame{
+          grid-area: b;
+          grid-column: 1/4;
+          font-size: 1.5em;
+
+        }
+        .centrador{
+          grid-row: 2 / 4;
+          grid-column: 1 / 4;
+        }
+        
         .gameboard{
          height: 400px;
           width: 400px;
@@ -129,3 +209,13 @@
           opacity: 0;
         }
       }
+      
+      @keyframes pushup{
+        0%{
+          transform: scale(0.9);
+          
+        
+        100%{
+            transform: scale(1.002);
+        }
+    }

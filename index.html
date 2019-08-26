@@ -9,17 +9,29 @@
   <title>Document</title>
 </head>
 <body>
+    <div class="container">
     
-    <div class="gameboard">
-      <div id="celeste" class="color celeste left" data-color="celeste"></div>
-      <div id="violeta" class="color violeta right" data-color="violeta"></div>
-      <div id="naranja" class="color naranja left" data-color="naranja"></div>
-      <div id="verde" class="color verde right" data-color="verde"></div>
-    </div>
-    <div class="centrador" id="centrador">
-      <button id="btnEmpezar" class="btn-start" onclick="empezarJuego()"> Iniciar </button>
 
+      <div class="titleOfGame">
+        <h1 class="gameTittle">Simon Says</h1>
+      </div>
+      <div class="contador">
+        <div class="contadorbox" id="contador">
+          1
+        </div>
+      </div>
+      
+      <div class="gameboard">
+        <div id="celeste" class="color celeste left" data-color="celeste"></div>
+        <div id="violeta" class="color violeta right" data-color="violeta"></div>
+        <div id="naranja" class="color naranja left" data-color="naranja"></div>
+        <div id="verde" class="color verde right" data-color="verde"></div>
+      </div>
+      <div class="centrador" id="centrador">
+        <button id="btnEmpezar" class="btn-start" onclick="empezarJuego()"> Start </button>
+      </div>
     </div>
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
    <script src="index.js"></script>

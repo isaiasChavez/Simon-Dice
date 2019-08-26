@@ -3,6 +3,7 @@ const celeste = document.getElementById('celeste')
 const violeta = document.getElementById('violeta')
 const naranja = document.getElementById('naranja')
 const verde = document.getElementById('verde')
+const $contador = document.getElementById("contador")
 const btnEmpezar = document.getElementById('btnEmpezar')
 const centrador = document.getElementById("centrador") 
 const marron = 1000
@@ -22,6 +23,7 @@ class Juego {
   inicializar() {
     this.elegirColor = this.elegirColor.bind(this)
     this.siguienteNivel = this.siguienteNivel.bind(this)
+    this.modificarContador(1)
     this.toggleBtnEmpezar()
     this.nivel = 1
     this.colores = {
@@ -58,6 +60,9 @@ class Juego {
       this.subnivel = 0
       this.iluminarSecuencia()
       this.agregarEventosClick()
+  }
+  modificarContador(contador){
+    $contador.innerHTML = contador
   }
   transformarNumeroAColor(num){
       switch (num) {
@@ -127,12 +132,14 @@ class Juego {
       
       if(numeroColor === this.secuencia[this.subnivel]){
           this.subnivel++
+          
           if(this.subnivel === this.nivel){
                   setTimeout(() => {
                         const responseModal =  swal('¡Correcto!',"La secuencia es la indicada",'success')
                         responseModal
                         .then(() =>{
                             this.nivel ++
+                            this.modificarContador(this.nivel)
                             this.eliminarEventosClick()
                             
                             if(this.nivel === (ULTIMO_NIVEL + 1)){
@@ -148,7 +155,6 @@ class Juego {
           }
       }else{
           this.perderJuego()
-          console.log("No es el botón correcto")
       }
   }
   ganarJuego(){
@@ -158,6 +164,7 @@ class Juego {
   perderJuego(){
       swal('¡Lo lamento!',"perdiste",'error')
       .then(() => {
+          
           this.eliminarEventosClick()
           this.inicializar()
       })
