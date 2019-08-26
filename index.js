@@ -8,7 +8,7 @@ const btnEmpezar = document.getElementById('btnEmpezar')
 const centrador = document.getElementById("centrador") 
 const marron = 1000
 
-const ULTIMO_NIVEL = 2
+const ULTIMO_NIVEL = 5
 
 class Juego {
   constructor() {
@@ -21,6 +21,7 @@ class Juego {
   }
 
   inicializar() {
+      this.agregarEventosClick = this.agregarEventosClick.bind(this)
     this.elegirColor = this.elegirColor.bind(this)
     this.siguienteNivel = this.siguienteNivel.bind(this)
     this.modificarContador(1)
@@ -58,8 +59,9 @@ class Juego {
   //
   siguienteNivel(){
       this.subnivel = 0
-      this.iluminarSecuencia()
-      this.agregarEventosClick()
+     let timeO = this.iluminarSecuencia()
+    setTimeout(this.agregarEventosClick, timeO);
+      
   }
   modificarContador(contador){
     $contador.innerHTML = contador
@@ -94,15 +96,20 @@ class Juego {
   }
 
   iluminarSecuencia( time = 1000){
+      var timeLimit = 0;
       for(let i = 0; i< this.nivel; i++){
           let color = this.transformarNumeroAColor(this.secuencia[i])
           setTimeout(() => {
               this.iluminarColor(color)
           }, time * i)   
+          timeLimit += (time * (i+1));
       }
+
+      return timeLimit;
   }
    iluminarColor(color){
       this.colores[color].classList.add('light')
+
       setTimeout(() => {
           this.apagarColor(color)
       }, 350);
@@ -126,8 +133,9 @@ class Juego {
   }
    elegirColor(ev){
       const nombreColor = ev.target.dataset.color
-      const numeroColor = this.transformarColorANumero(nombreColor)
 
+      const numeroColor = this.transformarColorANumero(nombreColor)
+      
       this.iluminarColor(nombreColor)  
       
       if(numeroColor === this.secuencia[this.subnivel]){

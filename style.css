@@ -29,7 +29,9 @@
       }
       .gameboard {
         box-shadow: -1px 0px 9px 0px black;
-
+        display: flex;
+        flex-wrap: wrap;
+        
         grid-area: f;
         height: 50vh;
         width: 50vh;
@@ -39,14 +41,21 @@
         max-height: 60vh;
         max-width: 60vh;
         box-sizing: border-box;
+        border:outset;
+        border-color: white;
+        
       }
 
       .color {
-        width: 50%;
-        height: 50%;
-        display: inline-block;
+        opacity: 0.7;
+        min-width: 50%;
         
+        height: 50%;
+        border: outset;
+        box-sizing: border-box;
+        border-color: rgb(255, 255, 255);
       }
+      
       .color:active{
         animation-name: pushup;
         animation-duration: 0.4s;
@@ -93,7 +102,8 @@
 
       .celeste {
         background: #22a6b3;
-        
+        border-top: none;
+        border-left: none;
       }
 
       .celeste.light {
@@ -102,6 +112,8 @@
 
       .violeta {
         background: #be2edd;
+        border-top: none;
+        border-right: none;
       }
 
       .violeta.light {
@@ -110,6 +122,8 @@
 
       .naranja {
         background: #f0932b;
+        border-bottom: none;
+        border-left: none;
       }
 
       .naranja.light {
@@ -117,6 +131,8 @@
       }
 
       .verde {
+        border-right: none;
+        border-bottom: none;
         background: #6ab04c;
       }
 
@@ -213,9 +229,13 @@
       @keyframes pushup{
         0%{
           transform: scale(0.9);
-          
-        
+          box-shadow: inset 0 0 20px 1px black;
+
+        }
         100%{
             transform: scale(1.002);
+            box-shadow: inset 0 0 20px 1px black;
+
+            
         }
     }
