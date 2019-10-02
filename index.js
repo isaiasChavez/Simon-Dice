@@ -24,6 +24,7 @@ class Juego {
       this.agregarEventosClick = this.agregarEventosClick.bind(this)
     this.elegirColor = this.elegirColor.bind(this)
     this.siguienteNivel = this.siguienteNivel.bind(this)
+
     this.modificarContador(1)
     this.toggleBtnEmpezar()
     this.nivel = 1
@@ -59,8 +60,8 @@ class Juego {
   //
   siguienteNivel(){
       this.subnivel = 0
-     let timeO = this.iluminarSecuencia()
-    setTimeout(this.agregarEventosClick, timeO);
+    this.iluminarSecuencia()
+     this.agregarEventosClick();
       
   }
   modificarContador(contador){
@@ -95,17 +96,17 @@ class Juego {
       }
   }
 
-  iluminarSecuencia( time = 1000){
-      var timeLimit = 0;
+  iluminarSecuencia(){
+    
+      
       for(let i = 0; i< this.nivel; i++){
           let color = this.transformarNumeroAColor(this.secuencia[i])
           setTimeout(() => {
               this.iluminarColor(color)
-          }, time * i)   
-          timeLimit += (time * (i+1));
+          }, 1000 * i)   
       }
 
-      return timeLimit;
+      
   }
    iluminarColor(color){
       this.colores[color].classList.add('light')
