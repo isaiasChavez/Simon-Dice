@@ -15,7 +15,6 @@ class Juego {
     this.inicializar= this.inicializar.bind(this)
     this.inicializar()
     this.generarSecuencia()
-    //
     setTimeout(this.siguienteNivel, 500);
     
   }
@@ -60,8 +59,9 @@ class Juego {
   //
   siguienteNivel(){
       this.subnivel = 0
-    this.iluminarSecuencia()
-     this.agregarEventosClick();
+    var tiempoDeLasAnimaciones  = this.iluminarSecuencia()
+    setTimeout(this.agregarEventosClick, tiempoDeLasAnimaciones);
+     
       
   }
   modificarContador(contador){
@@ -96,27 +96,37 @@ class Juego {
       }
   }
 
+
   iluminarSecuencia(){
-    
-      
+
+    var ultimoValor = 0;
+
       for(let i = 0; i< this.nivel; i++){
           let color = this.transformarNumeroAColor(this.secuencia[i])
           setTimeout(() => {
               this.iluminarColor(color)
-          }, 1000 * i)   
+          }, 1000 * i) 
+
+          if(i == (this.nivel-1)){
+            ultimoValor = 1000 * i; 
+             }  
       }
+      console.log(ultimoValor)
+      return ultimoValor
 
       
   }
    iluminarColor(color){
-      this.colores[color].classList.add('light')
 
-      setTimeout(() => {
-          this.apagarColor(color)
-      }, 350);
+        this.colores[color].classList.add('light')
+        setTimeout(() => {
+           this.apagarColor(color)
+         },350) 
   }
   apagarColor(color){
-      this.colores[color].classList.remove('light')
+
+          this.colores[color].classList.remove('light')
+
   }
   agregarEventosClick()
   {
