@@ -8,7 +8,7 @@ const btnEmpezar = document.getElementById('btnEmpezar')
 const centrador = document.getElementById("centrador") 
 const marron = 1000
 
-const ULTIMO_NIVEL = 5
+const ULTIMO_NIVEL = 10
 
 class Juego {
   constructor() {
